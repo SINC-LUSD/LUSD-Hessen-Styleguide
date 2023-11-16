@@ -1,0 +1,21 @@
+name: Deploy Storybook to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Setzen Sie hier den Namen Ihres Hauptzweigs ein
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: npm install
+    - name: Build Storybook
+      run: npm run build-storybook
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@4.1.4
+      with:
+        branch: gh-pages  # Der Zweig, auf dem Ihre Seite gehostet wird
+        folder: storybook-static  # Der Ordner, in dem Ihr Storybook-Build gespeichert ist
